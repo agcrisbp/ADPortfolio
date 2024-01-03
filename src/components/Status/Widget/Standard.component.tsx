@@ -59,7 +59,7 @@ export function Widget(): JSX.Element {
 						},
 						title: status.spotify.song,
 						description: status.spotify.artist,
-						icon: 'feather:music',
+						icon: 'fa-brands:spotify',
 					},
 			  ]
 			: []),
