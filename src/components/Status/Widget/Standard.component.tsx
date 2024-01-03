@@ -39,10 +39,11 @@ export function Widget(): JSX.Element {
 		{
 			avatar: {
 				alt: 'Discord Avatar',
+				href: `https://discordapp.com/users/${status.discord_user.id}`,
 				url: `https://cdn.discordapp.com/avatars/${status.discord_user.id}/${status.discord_user.avatar}.webp?size=256`,
 			},
-			title: status.discord_user.username,
-			description: `#${status.discord_user.discriminator}`,
+			title: status.discord_user.global_name,
+			description: `#${status.discord_user.username}`,
 			icon: <Status.Indicator color={color} pulse={status.discord_status !== 'offline'} />,
 		},
 
