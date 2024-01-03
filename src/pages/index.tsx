@@ -95,6 +95,7 @@ export default function HomePage(): JSX.Element {
 							);
 						})}
 					</div>
+					<Status.Widget />
 					<Spotify />
 				</div>
 			</div>
