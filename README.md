@@ -59,8 +59,8 @@ yarn dev
 - Edit `https://api.github.com/users/YourUsername/repos` in [projects.ts](/src/lib/projects.ts).
 
 ### Domain Setup
-- Make sure your domain is already connected with [Vercel Nameservers](https://vercel.com/docs/projects/domains/working-with-nameservers), then change the [next-sitemap.js](/next-sitemap.js).
-- Also take a look to [vercel.json](/vercel.json).
+- Make sure your domain is already connected with [Vercel Nameservers](https://vercel.com/docs/projects/domains/working-with-nameservers), then change the [vercel.json](/vercel.json).
+- Also take a look to [next-sitemap.js](/next-sitemap.js).
 
 ---
 
