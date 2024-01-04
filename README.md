@@ -52,7 +52,7 @@ yarn dev
 - Read: [Setup](https://adlink.aghea.site/frontend#add-discord-status), and **YOU MUST** join [Lanyard Discord Server](https://discord.gg/lanyard).
 
 ### Spotify Setup
-- Use [ADLink Spotify](https://github.com/agcrisbp/Spotify-ADLink) or contact me at [SimpleX](https://contact.aghea.site) to use mine.
+- Use [ADLink Spotify](https://github.com/agcrisbp/Spotify-ADLink).
 
 ### GITHUB_PATH & Github APi Setup
 - [Generate new token](https://github.com/settings/tokens?type=beta).
