@@ -22,7 +22,13 @@ interface Activity {
 	avatar: Avatar;
 	title: string;
 	description: string | Array<string>;
+	timestamps?: Timestamps;
 	icon?: string | ReactNode;
+}
+
+interface Timestamps {
+	start: number;
+	end: number;
 }
 
 export function Widget(): JSX.Element {
@@ -42,35 +48,18 @@ export function Widget(): JSX.Element {
 				href: `https://discordapp.com/users/${status.discord_user.id}`,
 				url: `https://cdn.discordapp.com/avatars/${status.discord_user.id}/${status.discord_user.avatar}.webp?size=256`,
 			},
-			title: status.discord_user.global_name,
+			title: `${status.discord_user.global_name}`,
 			description: `${status.discord_user.username}`,
 			icon: <Status.Indicator color={color} pulse={status.discord_status !== 'offline'} />,
 		},
 
-		/**
-		 * Spotify
-		 */
-		...(status.spotify && status.listening_to_spotify
-			? [
-					{
-						avatar: {
-							alt: `${status.spotify.song} - ${status.spotify.artist}`,
-							href: `https://open.spotify.com/track/${status.spotify.track_id}`,
-							url: status.spotify.album_art_url,
-						},
-						title: status.spotify.song,
-						description: status.spotify.artist,
-						icon: 'fa-brands:spotify',
-					},
-			  ]
-			: []),
 
 		/**
 		 * All other activities
 		 */
 		...(status.activities.length > 0
 			? status.activities.map((activity) => {
-					if (activity.id === 'custom' || activity.id.includes('spotify')) return null;
+					if (activity.id === 'custom' ) return null;
 
 					const hasAsset = activity.assets && activity.assets.large_image ? true : false;
 					const avatar = hasAsset
@@ -103,7 +92,7 @@ export function Widget(): JSX.Element {
 					<Fragment key={index}>
 						<div className="inline-flex items-center">
 							{'icon' in activity.avatar ? (
-								<div className="max-w-md max-h-12 my-auto rounded pointer-events-none select-none ring-2 ring-gray-200 dark:ring-gray-500">
+								<div className="max-w-12.5 max-h-12.5 my-auto rounded pointer-events-none select-none ring-2 ring-gray-200 dark:ring-gray-500">
 									<Icon
 										className="w-12 h-12 p-1 text-gray-200 dark:text-gray-400"
 										icon="lucide:gamepad-2"
