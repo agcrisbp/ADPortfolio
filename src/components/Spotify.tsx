@@ -3,7 +3,7 @@ import { Icon } from '@iconify/react';
 import Image from "next/future/image";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
-
+import Link from "next/link";
 
 import type {
 	NowPlayingResponseError,
@@ -52,6 +52,7 @@ export default function Spotify() {
 	return (
 		<div className="text-gray-900 dark:text-white flex space-x-4 w-full max-w-sm mx-auto px-4 py-4 bg-white/50 dark:bg-gray-900/50 dark:border-gray-600 backdrop-filter backdrop-blur-sm border-2 border-gray-200 rounded-lg hover:shadow-lg default-transition">
 			<div>
+				  <Link href="/spotify">
 				  <Image
 					  src={
 						  data?.track?.album.images[0]?.url ??
@@ -61,8 +62,9 @@ export default function Spotify() {
 					  width={256}
 					  height={256}
 					  priority={true}
-					  className="max-w-md max-h-12 my-auto rounded pointer-events-none select-none ring-2 ring-gray-200 dark:ring-gray-500 w-20 max-h-20 rounded"
+					  className="max-w-12.5 max-h-12.5 my-auto rounded select-none ring-2 ring-gray-200 dark:ring-gray-500 w-20 max-h-20 rounded"
 				  />
+				  </Link>
 			</div>
 			<div className="text-left basis-full flex-col">
 				<p>
