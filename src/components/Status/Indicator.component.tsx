@@ -1,7 +1,6 @@
 import clsx from 'clsx';
-
+import Link from "next/link";
 import { colors } from '~/lib';
-
 import type { WithClassName } from '~/types';
 
 interface IndicatorProps extends WithClassName {
@@ -15,6 +14,7 @@ export function Indicator({
 	pulse = false,
 }: IndicatorProps): JSX.Element {
 	return (
+	  <Link href="/discord">
 		<span
 			className={clsx(
 				'relative inline-flex justify-center items-center w-5 h-5 mr-3',
@@ -33,5 +33,6 @@ export function Indicator({
 				/>
 			</span>
 		</span>
+		</Link>
 	);
 }
