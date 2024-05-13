@@ -1,5 +1,10 @@
 <center><img src="/public/images/sign.png" /></center>
 
+<p align="center">
+    <img alt='GitHub Clones' src='https://img.shields.io/badge/dynamic/json?color=success&label=Clone&query=count&url=https://gist.github.com/agcrisbp/1fbd1d6a861373cb5a15f392018ee24f/raw/clone.json&logo=github'>
+    <img alt='GitHub Clones' src='https://img.shields.io/badge/dynamic/json?color=success&label=Unique&query=uniques&url=https://gist.github.com/agcrisbp/1fbd1d6a861373cb5a15f392018ee24f/raw/clone.json&logo=githubactions&logoColor=white'>
+</p>
+
 ---
 
 # About
