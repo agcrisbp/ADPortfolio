@@ -14,7 +14,7 @@ export function Indicator({
 	pulse = false,
 }: IndicatorProps): JSX.Element {
 	return (
-	  <Link href="/discord">
+	  <Link href="/status">
 		<span
 			className={clsx(
 				'relative inline-flex justify-center items-center w-5 h-5 mr-3',

@@ -31,6 +31,31 @@ interface Timestamps {
 	end: number;
 }
 
+const getThumbnailUrl = (imagePath: string) => {
+  if (!imagePath) return "/images/emptysong.jpg";
+
+  try {
+    // Handle Discord's external URLs
+    if (imagePath.includes("mp:external")) {
+      const imageUrl = imagePath.split("mp:external/")[1];
+      return `https://media.discordapp.net/external/${imageUrl}`;
+    }
+
+    // Handle Discord's attachment URLs
+    if (imagePath.includes("mp:attachments")) {
+      const imageUrl = imagePath.split("attachments/")[1];
+      return `https://cdn.discordapp.com/attachments/${imageUrl}`;
+    }
+
+    // For any other unexpected format
+    console.warn("Unknown image path format:", imagePath);
+    return "/images/emptysong.jpg";
+  } catch (error) {
+    console.error("Error processing imagePath:", error);
+    return "/images/emptysong.jpg";
+  }
+};
+
 export function Widget(): JSX.Element {
 	const { color, loading, status } = useStatus();
 
@@ -53,36 +78,37 @@ export function Widget(): JSX.Element {
 			icon: <Status.Indicator color={color} pulse={status.discord_status !== 'offline'} />,
 		},
 
-
 		/**
 		 * All other activities
 		 */
-		...(status.activities.length > 0
-			? status.activities.map((activity) => {
-					if (activity.id === 'custom' ) return null;
-
-					const hasAsset = activity.assets && activity.assets.large_image ? true : false;
-					const avatar = hasAsset
-						? {
-								alt: activity.details,
-								url: `https://cdn.discordapp.com/app-assets/${activity.application_id}/${activity.assets.large_image}.webp`,
-						  }
-						: {
-								alt: activity.name,
-								icon: true,
-								url: '',
-						  };
-
-					return {
-						avatar,
-						title: activity.name,
-						description: [
-							activity.details,
-							...(activity.state ? [activity.state] : []),
-						],
-					};
-			  })
-			: []),
+      ...(status.activities.length > 0
+        ? status.activities.map((activity) => {
+            if (activity.id === "custom") return null;
+      
+            // Check if activity has a valid asset
+            const hasAsset = activity.assets && activity.assets.large_image;
+      
+            const avatar = hasAsset
+              ? {
+                  alt: activity.details || activity.name,
+                  url: getThumbnailUrl(activity.assets.large_image), // Use updated function
+                }
+              : {
+                  alt: activity.name,
+                  icon: true,
+                  url: "/images/emptysong.jpg", // Fallback for missing image
+                };
+      
+            return {
+              avatar,
+              title: activity.name,
+              description: [
+                activity.details,
+                ...(activity.state ? [activity.state] : []),
+              ],
+            };
+          })
+        : []),
 	].filter((item) => item !== null);
 
 	return (
