@@ -31,29 +31,30 @@ interface Timestamps {
 	end: number;
 }
 
-const getThumbnailUrl = (imagePath: string) => {
+const getThumbnailUrl = (imagePath: string, applicationId?: string) => {
   if (!imagePath) return "/images/emptysong.jpg";
 
-  try {
-    // Handle Discord's external URLs
-    if (imagePath.includes("mp:external")) {
-      const imageUrl = imagePath.split("mp:external/")[1];
-      return `https://media.discordapp.net/external/${imageUrl}`;
-    }
-
-    // Handle Discord's attachment URLs
-    if (imagePath.includes("mp:attachments")) {
-      const imageUrl = imagePath.split("attachments/")[1];
-      return `https://cdn.discordapp.com/attachments/${imageUrl}`;
-    }
-
-    // For any other unexpected format
-    console.warn("Unknown image path format:", imagePath);
-    return "/images/emptysong.jpg";
-  } catch (error) {
-    console.error("Error processing imagePath:", error);
-    return "/images/emptysong.jpg";
+  // Handle Spotify-specific images
+  if (imagePath.startsWith("spotify:")) {
+    const spotifyImageId = imagePath.split(":")[1];
+    return `https://i.scdn.co/image/${spotifyImageId}`;
   }
+
+  // Discord CDN assets
+  if (applicationId && imagePath) {
+    return `https://cdn.discordapp.com/app-assets/${applicationId}/${imagePath}.png?size=160`;
+  }
+
+  // Handle external or attachment images
+  if (imagePath.includes("mp:external")) {
+    const imageUrl = imagePath.split("mp:external/")[1];
+    return `https://media.discordapp.net/external/${imageUrl}`;
+  } else if (imagePath.includes("mp:attachments")) {
+    const imageUrl = imagePath.split("attachments/")[1];
+    return `https://cdn.discordapp.com/attachments/${imageUrl}`;
+  }
+
+  return "/images/emptysong.jpg"; // Default fallback
 };
 
 export function Widget(): JSX.Element {
