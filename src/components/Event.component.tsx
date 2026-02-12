@@ -1,5 +1,5 @@
 import { create as createConfetti } from 'canvas-confetti';
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import { EventType } from '~/types';
 
@@ -7,7 +7,7 @@ export interface EventProps {
 	event: EventType;
 }
 
-export function Event({ event }: EventProps): JSX.Element {
+export function Event({ event }: EventProps): React.JSX.Element {
 	const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
 	const confetti = createConfetti(canvasRef.current, {

@@ -1,4 +1,6 @@
-export function CodeStyles(): JSX.Element {
+import React from 'react';
+
+export function CodeStyles(): React.JSX.Element {
 	return (
 		<style global jsx>
 			{`

@@ -1,3 +1,4 @@
+import React from 'react';
 import clsx from 'clsx';
 import Link from "next/link";
 import { colors } from '~/lib';
@@ -12,7 +13,7 @@ export function Indicator({
 	className,
 	color = 'gray',
 	pulse = false,
-}: IndicatorProps): JSX.Element {
+}: IndicatorProps): React.JSX.Element {
 	return (
 	  <Link href="/status">
 		<span

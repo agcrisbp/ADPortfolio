@@ -1,9 +1,10 @@
+import React from 'react';
 import { Disclosure } from '@headlessui/react';
 
 import { Button, Navbar } from '~/components';
 import { useNavigation } from '~/lib';
 
-export function Standard(): JSX.Element {
+export function Standard(): React.JSX.Element {
 	const { menu, settings } = useNavigation();
 
 	return (

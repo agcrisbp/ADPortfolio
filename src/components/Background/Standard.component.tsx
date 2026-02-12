@@ -1,13 +1,13 @@
 import { Camera, Color, Geometry, Mesh, Program, Renderer } from 'ogl-typescript';
 import { log } from 'next-axiom';
 import { useEffectOnce } from 'react-use';
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 
 import { colors } from '~/lib';
 import VertexShader from './vertex.glsl';
 import FragmentShader from './fragment.glsl';
 
-export function Standard(): JSX.Element {
+export function Standard(): React.JSX.Element {
 	const containerRef = useRef<HTMLDivElement | null>(null);
 
 	useEffectOnce(() => {

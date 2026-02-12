@@ -1,4 +1,6 @@
-export function ElementsStyles(): JSX.Element {
+import React from 'react';
+
+export function ElementsStyles(): React.JSX.Element {
 	return (
 		<style global jsx>
 			{`

@@ -1,3 +1,4 @@
+import React from 'react';
 import { format, parse } from 'date-fns';
 import { id, enUS } from 'date-fns/locale';
 import { Icon } from '@iconify/react';
@@ -24,7 +25,7 @@ export const getStaticProps: GetStaticProps<TimelineProps> = async () => {
 	};
 };
 
-export default function TimelinePage({ timeline: rawTimeline }: TimelineProps): JSX.Element {
+export default function TimelinePage({ timeline: rawTimeline }: TimelineProps): React.JSX.Element {
 	const timeline = rawTimeline.map((event) => ({
 		...event,
 		// Note: Custom parser needed as Safari on iOS doesn't like the standard `new Date()` parsing

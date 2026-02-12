@@ -1,3 +1,4 @@
+import React from 'react';
 import NProgress from 'nprogress';
 import splitbee from '@splitbee/web';
 import { Analytics } from '@vercel/analytics/react';
@@ -20,9 +21,9 @@ NProgress.configure({
 	speed: 800,
 });
 
-export { reportWebVitals } from 'next-axiom';
+import { AxiomWebVitals } from 'next-axiom';
 
-export default function App({ Component, pageProps }: AppProps): JSX.Element {
+export default function App({ Component, pageProps }: AppProps): React.JSX.Element {
 	const router = useRouter();
 	const [play] = useClick();
 

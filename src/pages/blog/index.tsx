@@ -1,3 +1,4 @@
+import React from 'react';
 import { Blog } from '~/components';
 import { getAllPostsFrontMatter } from '~/lib/post';
 import { Layout } from '~/layouts';
@@ -20,7 +21,7 @@ export const getStaticProps: GetStaticProps<BlogProps> = async () => {
 	};
 };
 
-export default function BlogPage({ serialisedFrontmatters }: BlogProps): JSX.Element {
+export default function BlogPage({ serialisedFrontmatters }: BlogProps): React.JSX.Element {
 	const frontmatters = JSON.parse(serialisedFrontmatters) as Array<FrontMatter>;
 
 	if (frontmatters.length <= 0) return <Blog.Error routeBlog={false} />;

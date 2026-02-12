@@ -1,3 +1,4 @@
+import React from 'react';
 import { Icon } from '@iconify/react';
 import { useRouter } from 'next/router';
 
@@ -5,7 +6,7 @@ import { Button } from '~/components';
 import { Layout } from '~/layouts';
 import { NavigationItemType } from '~/types';
 
-export default function Error(): JSX.Element {
+export default function Error(): React.JSX.Element {
 	const router = useRouter();
 	const { status } = router.query;
 

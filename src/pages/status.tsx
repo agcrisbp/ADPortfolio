@@ -1,8 +1,9 @@
+import React from 'react';
 import { Layout } from '~/layouts';
 import { Status } from '~/components';
 import GenericMeta from "../components/GenericMeta";
 
-export default function StatusPage(): JSX.Element {
+export default function StatusPage(): React.JSX.Element {
 	return (
 		<Layout.Default>
 		  <GenericMeta

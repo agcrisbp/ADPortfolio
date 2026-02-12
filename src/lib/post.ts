@@ -1,6 +1,6 @@
 import matter from 'gray-matter';
 import { format } from 'date-fns';
-import { id, enUS } from 'date-fns/locale';
+import { enUS } from 'date-fns/locale';
 import { join } from 'path';
 import { readdirSync, readFileSync } from 'fs';
 import { serialize } from 'next-mdx-remote/serialize';
@@ -9,7 +9,8 @@ import RehypeAutolinkHeadings from 'rehype-autolink-headings';
 import RemarkCodeTitles from 'remark-code-titles';
 import RemarkEmoji from 'remark-emoji';
 import RemarkPrism from 'remark-prism';
-import RemarkSlug from 'remark-slug';
+import RemarkGfm from 'remark-gfm';
+import RehypeSlug from 'rehype-slug';
 
 import type { FrontMatter, Post, RawFrontMatter } from '~/types';
 
@@ -56,12 +57,21 @@ export async function getAllPostsFrontMatter(): Promise<Array<FrontMatter>> {
 export async function getPost(slug: string): Promise<Post> {
 	const raw = readFileSync(join(BLOG_POSTS_DIR, `${slug}.md`)).toString();
 	const { content, data } = matter(raw);
+	
 	const source = await serialize(content, {
-		scope: data,
 		mdxOptions: {
-			rehypePlugins: [[RehypeAutolinkHeadings, {}]],
-			remarkPlugins: [RemarkCodeTitles, RemarkEmoji, RemarkPrism, RemarkSlug],
+			rehypePlugins: [
+				RehypeSlug, 
+				[RehypeAutolinkHeadings, {}]
+			],
+			remarkPlugins: [
+				RemarkGfm,
+				RemarkCodeTitles, 
+				RemarkEmoji, 
+				RemarkPrism
+			],
 		},
+		scope: data,
 	});
 
 	const frontmatter = data as RawFrontMatter;

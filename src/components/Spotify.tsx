@@ -1,5 +1,5 @@
 import { Icon } from '@iconify/react';
-import Image from "next/future/image";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
 import Link from "next/link";

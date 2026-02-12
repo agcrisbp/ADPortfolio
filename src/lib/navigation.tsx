@@ -77,7 +77,7 @@ export function useNavigation(): {
 
 	const menuItems: NavigationItems = [
 		...staticMenuItems,
-		...(!loading && status.discord_status !== 'offline'
+		...(!loading && status?.discord_status !== 'offline'
 			? [
 					[
 						{

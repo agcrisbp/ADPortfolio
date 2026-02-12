@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import Link from 'next/link';
-import { forwardRef, Fragment } from 'react';
+import React, { forwardRef, Fragment } from 'react';
 import { Icon } from '@iconify/react';
 import { Menu, Transition } from '@headlessui/react';
 
@@ -17,8 +17,12 @@ interface StandardProps extends WithChildren {
 	position: Position;
 }
 
-interface MenuLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
+interface StyledMenuItemProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
 	active: boolean;
+}
+
+interface MenuLinkProps extends StyledMenuItemProps {
+	href: string;
 }
 
 interface MenuButtonIconProps extends WithClassName {
@@ -26,7 +30,7 @@ interface MenuButtonIconProps extends WithClassName {
 	direction?: 'left' | 'right';
 }
 
-const StyledMenuItem = forwardRef<HTMLAnchorElement, MenuLinkProps>(function StyledMenuItem(
+const StyledMenuItem = forwardRef<HTMLAnchorElement, StyledMenuItemProps>(function StyledMenuItem(
 	{ active, children, className, ...rest },
 	ref,
 ) {
@@ -46,11 +50,21 @@ const StyledMenuItem = forwardRef<HTMLAnchorElement, MenuLinkProps>(function Sty
 	);
 });
 
+function MenuLink({ children, href, active, onClick, ...rest }: MenuLinkProps): React.JSX.Element {
+	return (
+		<Link href={href} passHref legacyBehavior>
+			<StyledMenuItem active={active} onClick={onClick} {...rest}>
+				{children}
+			</StyledMenuItem>
+		</Link>
+	);
+}
+
 function MenuButtonIcon({
 	className,
 	icon,
 	direction: type = 'left',
-}: MenuButtonIconProps): JSX.Element {
+}: MenuButtonIconProps): React.JSX.Element {
 	if (typeof icon !== 'string') return <>{icon}</>;
 
 	if (type === 'right')
@@ -59,25 +73,10 @@ function MenuButtonIcon({
 	return <Icon aria-hidden="true" className={clsx('w-5 h-5 mr-3', className)} icon={icon} />;
 }
 
-/**
- * Menu Link
- *
- * @see https://headlessui.dev/react/menu#integrating-with-next-js
- */
-function MenuLink({ children, href, onClick, ...rest }: MenuLinkProps): JSX.Element {
-	return (
-		<Link href={href} passHref>
-			<StyledMenuItem onClick={(...args): void => onClick(...args)} {...rest}>
-				{children}
-			</StyledMenuItem>
-		</Link>
-	);
-}
-
-export function Dropdown({ children, items, position = 'top-left' }: StandardProps): JSX.Element {
+export function Dropdown({ children, items, position = 'top-left' }: StandardProps): React.JSX.Element {
 	return (
 		<Menu as="div" className="relative inline-block text-left">
-			{({ open }): JSX.Element => (
+			{({ open }): React.JSX.Element => (
 				<>
 					<Menu.Button as={Fragment}>{children}</Menu.Button>
 
@@ -100,16 +99,14 @@ export function Dropdown({ children, items, position = 'top-left' }: StandardPro
 								<div className="py-2" key={index}>
 									{section.map((item, j) => (
 										<Menu.Item key={j}>
-											{({ active }): JSX.Element => {
+											{({ active }): React.JSX.Element => {
 												switch (item.type) {
 													case NavigationItemType.ACTION:
 														return (
 															<StyledMenuItem
 																active={active}
 																className="group"
-																onClick={(): void =>
-																	item.onClick()
-																}>
+																onClick={(): void => item.onClick()}>
 																<MenuButtonIcon icon={item.icon} />
 																{item.text}
 																{item.endIcon && (
@@ -137,9 +134,7 @@ export function Dropdown({ children, items, position = 'top-left' }: StandardPro
 																	href={item.href}
 																	rel="noopener noreferrer"
 																	target="_blank">
-																	<MenuButtonIcon
-																		icon={item.icon}
-																	/>
+																	<MenuButtonIcon icon={item.icon} />
 																	{item.text}
 																	<span className="flex-1" />
 																	<MenuButtonIcon
@@ -150,9 +145,7 @@ export function Dropdown({ children, items, position = 'top-left' }: StandardPro
 															);
 
 														return (
-															<MenuLink
-																active={active}
-																href={item.href}>
+															<MenuLink active={active} href={item.href}>
 																<MenuButtonIcon icon={item.icon} />
 																{item.text}
 															</MenuLink>

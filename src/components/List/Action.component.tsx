@@ -1,3 +1,4 @@
+import React from 'react';
 import clsx from 'clsx';
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ElementType } from 'react';
 
@@ -17,7 +18,7 @@ export function Action({
 	children,
 	className,
 	...rest
-}: ActionProps): JSX.Element {
+}: ActionProps): React.JSX.Element {
 	return (
 		<Component
 			className={clsx(

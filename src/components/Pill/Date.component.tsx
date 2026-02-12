@@ -1,3 +1,4 @@
+import React from 'react';
 import clsx from 'clsx';
 import { Icon } from '@iconify/react';
 
@@ -7,7 +8,7 @@ interface DatePillProps extends WithClassName, WithChildren {
 	small?: boolean;
 }
 
-export function DatePill({ children, className, small = false }: DatePillProps): JSX.Element {
+export function DatePill({ children, className, small = false }: DatePillProps): React.JSX.Element {
 	return (
 		<div
 			className={clsx(

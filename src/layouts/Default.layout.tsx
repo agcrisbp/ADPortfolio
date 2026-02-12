@@ -1,3 +1,4 @@
+import React from 'react';
 import dynamic from 'next/dynamic';
 
 import { Navbar } from '~/components';
@@ -16,7 +17,7 @@ interface DefaultLayoutProps extends WithChildren {
 export function DefaultLayout({
 	background: overrideBackground,
 	children,
-}: DefaultLayoutProps): JSX.Element {
+}: DefaultLayoutProps): React.JSX.Element {
 	const { animations: background } = usePersistantState().get();
 	const showBackground = overrideBackground ?? background;
 

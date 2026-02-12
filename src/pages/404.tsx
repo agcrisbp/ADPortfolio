@@ -1,10 +1,11 @@
+import React from 'react';
 import { Icon } from '@iconify/react';
 
 import { Button } from '~/components';
 import { Layout } from '~/layouts';
 import { NavigationItemType } from '~/types';
 
-export default function Error(): JSX.Element {
+export default function Error(): React.JSX.Element {
 	return (
 		<Layout.Error>
 			<div className="flex flex-grow min-h-full pt-16 pb-12">

@@ -1,10 +1,12 @@
+import React from 'react';
+
 interface XStreamableProps {
 	id: string;
 	loop?: boolean;
 	title: string;
 }
 
-export function XStreamable({ id, loop = false, title }: XStreamableProps): JSX.Element {
+export function XStreamable({ id, loop = false, title }: XStreamableProps): React.JSX.Element {
 	return (
 		<div className="relative w-full h-0 my-2 pb-[56.250%]">
 			<iframe

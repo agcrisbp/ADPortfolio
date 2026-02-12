@@ -1,3 +1,4 @@
+import React from 'react';
 import type { ComponentProps, JSXElementConstructor, PropsWithChildren } from 'react';
 
 /**
@@ -61,6 +62,6 @@ export type WithClassName<T = Record<string, unknown>> = T & {
  * ```
  */
 export type WithProps<
-	T extends keyof JSX.IntrinsicElements | JSXElementConstructor<U>,
+	T extends keyof React.JSX.IntrinsicElements | JSXElementConstructor<U>,
 	U = unknown,
 > = ComponentProps<T>;

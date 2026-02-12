@@ -1,3 +1,4 @@
+import React from 'react';
 import { fetchProjects } from '~/lib/projects';
 import { Layout } from '~/layouts';
 import { Animate, List } from '~/components';
@@ -22,7 +23,7 @@ export const getStaticProps: GetStaticProps<ProjectProps> = async () => {
 	};
 };
 
-export default function ProjectsPage({ stringifiedProjects }: ProjectProps): JSX.Element {
+export default function ProjectsPage({ stringifiedProjects }: ProjectProps): React.JSX.Element {
 	const projects = JSON.parse(stringifiedProjects) as Array<Project>;
 
 	return (

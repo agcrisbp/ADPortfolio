@@ -1,3 +1,4 @@
+import React from 'react';
 import { Button } from '~/components';
 import { NavigationItemType } from '~/types';
 
@@ -10,7 +11,7 @@ interface XButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	label: string;
 }
 
-export function XButton({ external, href, icon, label }: XButtonProps): JSX.Element {
+export function XButton({ external, href, icon, label }: XButtonProps): React.JSX.Element {
 	return (
 		<Button.Standard type={NavigationItemType.LINK} external={external} href={href} icon={icon}>
 			{label}

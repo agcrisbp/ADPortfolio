@@ -1,3 +1,4 @@
+import React from 'react';
 import dynamic from 'next/dynamic';
 import { Icon } from '@iconify/react';
 import { differenceInYears, isSameDay, isSameMonth } from 'date-fns';
@@ -33,7 +34,7 @@ const ACTIONS: Array<NavigationItem> = [
 	},
 ];
 
-export default function HomePage(): JSX.Element {
+export default function HomePage(): React.JSX.Element {
 	const today = new Date();
 	const birthday = new Date('1998-08-31');
 	const age = differenceInYears(today, birthday);

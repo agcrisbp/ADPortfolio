@@ -1,3 +1,4 @@
+import React from 'react';
 import Image from 'next/image';
 import { MDXRemote } from 'next-mdx-remote';
 import { Blog, Pill } from '~/components';
@@ -42,7 +43,7 @@ export const getStaticProps: GetStaticProps<BlogPostProps, PathProps> = async ({
 	};
 };
 
-export default function BlogPost({ post }: BlogPostProps): JSX.Element {
+export default function BlogPost({ post }: BlogPostProps): React.JSX.Element {
 	return (
 		<>
 			<Layout.Blog
@@ -54,9 +55,7 @@ export default function BlogPost({ post }: BlogPostProps): JSX.Element {
 						images: [
 							{
 								url: post.frontmatter.banner,
-								alt: post.frontmatter.description,
-								width: 1280,
-								height: 720,
+								alt: post.frontmatter.description
 							},
 						],
 					},

@@ -1,3 +1,4 @@
+import React from 'react';
 import Image from 'next/image';
 
 interface XFigureProps {
@@ -6,17 +7,16 @@ interface XFigureProps {
 	src: string;
 }
 
-export function XFigure({ alt, caption, src }: XFigureProps): JSX.Element {
+export function XFigure({ alt, caption, src }: XFigureProps): React.JSX.Element {
 	return (
 		<figure>
 			<Image
 				alt={alt ?? caption}
 				className="rounded-3xl object-cover select-none hover:shadow-xl"
 				draggable={false}
-				height="100%"
 				layout="responsive"
 				src={src}
-				width="100%"
+				fill
 			/>
 			<figcaption>{alt ?? caption}</figcaption>
 		</figure>

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Icon } from '@iconify/react';
 import { Layout } from '~/layouts';
 import { Button } from '..';
@@ -7,7 +8,7 @@ interface ErrorProps {
 	routeBlog?: boolean;
 }
 
-export function Error({ routeBlog = true }: ErrorProps): JSX.Element {
+export function Error({ routeBlog = true }: ErrorProps): React.JSX.Element {
 	return (
 		<Layout.Error>
 			<div className="flex flex-grow min-h-full pt-16 pb-12">

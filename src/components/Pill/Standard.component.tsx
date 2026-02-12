@@ -1,9 +1,10 @@
+import React from 'react';
 import clsx from 'clsx';
 import { AnchorHTMLAttributes } from 'react';
 
 interface StandardPillProps extends AnchorHTMLAttributes<HTMLDivElement> {}
 
-export function Standard({ children, className, ...rest }: StandardPillProps): JSX.Element {
+export function Standard({ children, className, ...rest }: StandardPillProps): React.JSX.Element {
 	return (
 		<div
 			className={clsx(

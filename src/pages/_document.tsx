@@ -1,7 +1,8 @@
+import React from 'react';
 import clsx from 'clsx';
 import { Head, Html, Main, NextScript } from 'next/document';
 
-export default function Document(): JSX.Element {
+export default function Document(): React.JSX.Element {
 	return (
 		<Html lang="en">
 			<Head>
