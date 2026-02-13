@@ -85,7 +85,7 @@
 		"@types/spotify-web-api-node": "^5.0.11",
 		"@typescript-eslint/eslint-plugin": "^8.55.0",
 		"@typescript-eslint/parser": "^8.55.0",
-		"eslint": "10.0.0",
+		"eslint": "^9.39.2",
 		"eslint-config-next": "16.1.6",
 		"gray-matter": "^4.0.3",
 		"next-sitemap": "^4.2.3",
@@ -99,12 +99,6 @@
 	"overrides": {
 		"@hookstate/core": {
 			"react": "$react"
-		},
-		"@typescript-eslint/parser": {
-			"eslint": "$eslint"
-		},
-		"@typescript-eslint/eslint-plugin": {
-			"eslint": "$eslint"
 		}
 	}
 }
