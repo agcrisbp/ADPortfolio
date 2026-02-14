@@ -59,6 +59,11 @@ const getThumbnailUrl = (imagePath: string, applicationId?: string) => {
 
 function FallbackImage(props: React.ComponentProps<typeof Image>) {
   const [src, setSrc] = useState(props.src);
+  
+  React.useEffect(() => {
+    setSrc(props.src);
+  }, [props.src]);
+  
   return <Image {...props} src={src} onError={() => setSrc("/images/emptysong.jpg")} />;
 }
 
@@ -138,6 +143,7 @@ export function Widget(): React.JSX.Element {
                   rel="noreferrer noopener">
                   <div className="max-w-md max-h-12 my-auto rounded pointer-events-none select-none ring-2 ring-gray-200 dark:ring-gray-500">
                     <FallbackImage
+                      key={activity.avatar.url}
                       alt={activity.avatar.alt}
                       className="w-full max-h-12 rounded"
                       height={48}
