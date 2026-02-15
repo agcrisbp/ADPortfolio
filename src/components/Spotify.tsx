@@ -30,17 +30,17 @@ export default function Spotify() {
 	const [time, setTime] = useState(0);
 
 	useEffect(() => {
-		if (!data?.progessMs || !data.track) return;
+		if (!data?.progressMs || !data.item) return;
 
 		const started = Date.now();
 
 		const interval = setInterval(() => {
 			setTime(
 				data.isPaused
-					? data.progessMs
+					? data.progressMs
 					: Math.min(
-							data.progessMs! + Date.now() - started,
-							data?.track?.duration_ms
+							data.progressMs! + Date.now() - started,
+							data?.item?.duration_ms
 					  )
 			);
 		}, 100);
@@ -48,80 +48,117 @@ export default function Spotify() {
 		return () => clearInterval(interval);
 	}, [data]);
 
+	const item = data?.item;
+
+	const getImageUrl = () => {
+		if (!item) return "/images/emptysong.jpg";
+		if (item.type === "track") {
+			return item.album?.images?.[0]?.url ?? "/images/emptysong.jpg";
+		} else if (item.type === "episode") {
+			return item.images?.[0]?.url ?? "/images/emptysong.jpg";
+		}
+		return "/images/emptysong.jpg";
+	};
+
 	return (
 		<div className="text-gray-900 dark:text-white flex space-x-4 w-full max-w-sm mx-auto px-4 py-4 bg-white/50 dark:bg-gray-900/50 dark:border-gray-600 backdrop-filter backdrop-blur-sm border-2 border-gray-200 rounded-lg hover:shadow-lg default-transition">
 			<div>
-				  <Link href="/spotify">
-				  <Image
-					  src={
-						  data?.track?.album.images[0]?.url ??
-						  "/images/emptysong.jpg"
-					  }
-					  alt="Spotify Album Art"
-					  width={256}
-					  height={256}
-					  priority={true}
-					  className="max-w-12.5 max-h-12.5 my-auto rounded select-none ring-2 ring-gray-200 dark:ring-gray-500 w-20 max-h-20 rounded"
-				  />
-				  </Link>
+				<Link href="/spotify">
+					<Image
+						src={getImageUrl()}
+						alt="Spotify Album/Show Art"
+						width={256}
+						height={256}
+						priority={true}
+						className="max-w-12.5 max-h-12.5 my-auto rounded select-none ring-2 ring-gray-200 dark:ring-gray-500 w-20 max-h-20 rounded"
+					/>
+				</Link>
 			</div>
 			<div className="text-left basis-full flex-col">
 				<p>
-					{data?.track ? (
+					{item ? (
 						<>
 							<a
-								href={data.track.external_urls.spotify}
+								href={item.external_urls.spotify}
 								target="_blank"
 								rel="noopener noreferrer"
 								className="text-left font-bold border-b border-[#fff4] transition hover:border-white"
 							>
-								{data.track.name}
-							</a>{" "}
-							oleh{" "}
-							{data.track.artists.map((artist, i) => (
-								<span key={data.track?.id + artist.id}>
+								{item.name}
+							</a>
+							{item.type === "track" ? (
+								<>
+									{" "}by{" "}
+									{item.artists.map((artist: any, i: number) => (
+										<span key={item?.id + artist.id}>
+											<a
+												href={artist.external_urls.spotify}
+												target="_blank"
+												rel="noopener noreferrer"
+												className="text-gray-900 dark:text-white text-left border-b border-[#fff4] transition hover:border-white"
+											>
+												{artist.name}
+											</a>
+											{i < item.artists.length - 1 ? ", " : null}
+										</span>
+									))}
+								</>
+							) : (
+								<>
+									{" "}from{" "}
 									<a
-										href={artist.external_urls.spotify}
+										href={item.show.external_urls.spotify}
 										target="_blank"
 										rel="noopener noreferrer"
 										className="text-gray-900 dark:text-white text-left border-b border-[#fff4] transition hover:border-white"
 									>
-										{artist.name}
+										{item.show.name}
 									</a>
-									{i < data.track?.artists.length - 1
-										? ", "
-										: null}
-								</span>
-							))}
+								</>
+							)}
 						</>
 					) : (
 						"Not Listening to Anything"
 					)}
 				</p>
 				<p className="text-left">
-					{data?.track ? (
-						<>
-							Album{" "}
-							<a
-								href={data.track.album.external_urls.spotify}
-								target="_blank"
-								rel="noopener noreferrer"
-								className="border-b border-[#fff4] transition hover:border-white"
-							>
-								{data.track.album.name}
-							</a>
-						</>
+					{item ? (
+						item.type === "track" ? (
+							<>
+								Album{" "}
+								<a
+									href={item.album.external_urls.spotify}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="border-b border-[#fff4] transition hover:border-white"
+								>
+									{item.album.name}
+								</a>
+							</>
+						) : (
+							<>
+								Podcast{" "}
+								<a
+									href={item.show.external_urls.spotify}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="border-b border-[#fff4] transition hover:border-white"
+								>
+									{item.show.name}
+								</a>
+							</>
+						)
 					) : null}
 				</p>
 				<p className="flex items-center gap-1">
-					{data?.isPlayingNow && data.track ? (
+					{data?.isPlayingNow && item ? (
 						<span className="block w-full max-w-sm mt-2">
 							<span className="block h-0.5 rounded overflow-hidden bg-[#D8BFD8]">
 								<span
 									className="block h-full dark:bg-white bg-black"
 									style={{
 										width: `${
-											(time! / data.track.duration_ms) *
+											(time! / item.duration_ms) *
 											100
 										}%`
 									}}
@@ -139,7 +176,7 @@ export default function Spotify() {
 									)}
 								</span>
 								<span className="basis-full text-right">
-									{formatDuration(data.track.duration_ms)}
+									{formatDuration(item.duration_ms)}
 								</span>
 							</span>
 						</span>
@@ -153,7 +190,7 @@ export default function Spotify() {
 									className="w-4 h-4"
 								/>
 							</span>
-							{data?.track ? <>Terakhir diputar di </> : null}
+							{item ? <>Last played on </> : null}
 							Spotify
 						</>
 					)}
