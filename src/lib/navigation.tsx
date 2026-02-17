@@ -7,6 +7,8 @@ import { NavigationItemType, Theme } from '~/types';
 
 import type { NavigationItem, NavigationItems } from '~/types';
 
+import seo from '~/data/seo.json';
+
 const staticMenuItems: Array<Array<NavigationItem>> = [
 	[
 		{
@@ -34,36 +36,13 @@ const staticMenuItems: Array<Array<NavigationItem>> = [
 			href: '/timeline',
 		},
 	],
-	[
-		{
-			type: NavigationItemType.LINK,
-			icon: 'simple-icons:bluesky',
-			text: 'Bluesky',
-			href: '/bsky',
-			external: true,
-		},
-		{
-			type: NavigationItemType.LINK,
-			icon: 'ri:linkedin-box-fill',
-			text: 'LinkedIn',
-			href: '/linkedin',
-			external: true,
-		},
-		{
-			type: NavigationItemType.LINK,
-			icon: 'ri:github-fill',
-			text: 'GitHub',
-			href: '/github',
-			external: true,
-		},
-		{
-			type: NavigationItemType.LINK,
-			icon: 'ri:spotify-fill',
-			text: 'Spotify',
-			href: '/spotify',
-			external: true,
-		},
-	],
+	seo.social.map((social) => ({
+		type: NavigationItemType.LINK,
+		icon: social.icon,
+		text: social.name,
+		href: `${social.url}`,
+		external: true,
+	})),
 ];
 
 export function useNavigation(): {

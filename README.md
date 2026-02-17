@@ -1,8 +1,8 @@
 <center><img src="/public/images/sign.png" /></center>
 
 <p align="center">
-    <img alt='GitHub Clones' src='https://img.shields.io/badge/dynamic/json?color=success&label=Clone&query=count&url=https://gist.github.com/agcrisbp/1fbd1d6a861373cb5a15f392018ee24f/raw/clone.json&logo=github'>
-    <img alt='GitHub Clones' src='https://img.shields.io/badge/dynamic/json?color=success&label=Unique&query=uniques&url=https://gist.github.com/agcrisbp/1fbd1d6a861373cb5a15f392018ee24f/raw/clone.json&logo=githubactions&logoColor=white'>
+    <img alt='GitHub Clones' src='https://img.shields.io/badge/dynamic/json?color=success&label=Clone&query=count&url=https://gist.githubusercontent.com/agcrisbp/f90babfbb76e325b96a7311a2fca2bfb/raw/clone.json&logo=github'>
+    <img alt='GitHub Clones' src='https://img.shields.io/badge/dynamic/json?color=success&label=Unique&query=uniques&url=https://gist.githubusercontent.com/agcrisbp/f90babfbb76e325b96a7311a2fca2bfb/raw/clone.json&logo=githubactions&logoColor=white'>
 </p>
 
 ---
@@ -23,8 +23,8 @@
 
 # Quick Start
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/git?s=https://github.com/agcrisbp/ADPortfolio)
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/agcrisbp/ADPortfolio)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/git?s=https://github.com/charisprod/charfolio)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/charisprod/charfolio)
 
 ---
 
@@ -32,24 +32,24 @@
 
 - Create this app:
 ```
-yarn create next-app app -e https://github.com/agcrisbp/ADPortfolio
+npx create-next-app@latest charfolio --example https://github.com/charisprod/charfolio
 ```
 
 - Rename `.env.example` to `.env` and fill it with yours.
 
 - Run the app:
 ```
-yarn dev
+npm run dev
 ```
 
-> Edit & deploy.
+> Edit [seo.json](src/data/seo.json) & deploy.
 
 ---
 
 # Information
 
 ### Discord ID Setup
-- Read: [Setup](https://adlink-docs.vercel.app/frontend#add-discord-status), and **YOU MUST** join [Charis Production Discord Server](https://charisprod.xyz/invite).
+- Read: [Setup](https://charlink-docs.vercel.app/get-started/frontend#add-discord-status), and **YOU MUST** join [Charis Production Discord Server](https://charisprod.xyz/invite).
 
 ### Spotify Setup
 - Use [ADLink Spotify](https://github.com/agcrisbp/Spotify-ADLink).
@@ -59,12 +59,4 @@ yarn dev
 - Edit `https://api.github.com/users/YourUsername/repos` in [projects.ts](/src/lib/projects.ts).
 
 ### Domain Setup
-- Make sure your domain is already connected with [Vercel Nameservers](https://vercel.com/docs/projects/domains/working-with-nameservers), then change the [vercel.json](/vercel.json).
-- Also take a look to [next-sitemap.js](/next-sitemap.js).
-
----
-
-# QNA?
-- I really open my door to anyone who wants to ask questions if they encounter difficulties in creating this app. Please contact me through [Contact](https://aghea.vercel.app/contact).
-
----
+- Take a look to [next-sitemap.js](/next-sitemap.js) or read [Custom Domain](https://charlink-docs.vercel.app/get-started/custom-domain).

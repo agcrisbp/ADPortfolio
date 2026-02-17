@@ -53,6 +53,14 @@ export function CodeStyles(): React.JSX.Element {
 					-ms-hyphens: none;
 					hyphens: none;
 				}
+				
+				.code-block-wrapper {
+					@apply relative group;
+				}
+
+				.copy-button {
+					@apply absolute right-3 top-3 p-2 inline-flex w-fit h-fit rounded-md opacity-900 group-hover:opacity-100 transition-all duration-200 bg-gray-700/50 hover:bg-gray-700 text-white z-10 border border-gray-600 backdrop-blur-sm;
+				}
 
 				/* Selection */
 				code[class*='language-']::-moz-selection,

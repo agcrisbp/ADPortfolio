@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import Image from 'next/image';
 import { MDXRemote } from 'next-mdx-remote';
+import { Icon } from '@iconify/react';
 import { Blog, Pill } from '~/components';
 import { getPost, getAllPostSlugs } from '~/lib/post';
 import { Layout } from '~/layouts';
@@ -41,6 +42,47 @@ export const getStaticProps: GetStaticProps<BlogPostProps, PathProps> = async ({
 			},
 		},
 	};
+};
+
+const Pre = ({ children, ...props }: any) => {
+	const preRef = useRef<HTMLPreElement>(null);
+	const [copied, setCopied] = useState(false);
+
+	const onCopy = () => {
+		if (copied) return;
+		
+		setCopied(true);
+		if (preRef.current) {
+			navigator.clipboard.writeText(preRef.current.innerText);
+		}
+		setTimeout(() => setCopied(false), 2000);
+	};
+
+	return (
+		<div className="code-block-wrapper">
+			<button
+				onClick={onCopy}
+				className="copy-button"
+				title={copied ? 'Copied!' : 'Copy to clipboard'}
+			>
+				<Icon
+					icon={copied ? 'mdi:check' : 'mdi:content-copy'}
+					width={16}
+					height={16}
+					className={copied ? 'text-green-500' : ''}
+				/>
+			</button>
+			<pre ref={preRef} {...props}>
+				{children}
+			</pre>
+		</div>
+	);
+};
+
+const mdxComponents = {
+	...Blog.X,
+	pre: Pre,
+	img: (props: any) => <Blog.X.XFigure {...props} />,
 };
 
 export default function BlogPost({ post }: BlogPostProps): React.JSX.Element {
@@ -99,7 +141,7 @@ export default function BlogPost({ post }: BlogPostProps): React.JSX.Element {
 						</div>
 
 						<article className="max-w-prose prose prose-primary prose-lg text-gray-500 mx-auto">
-							<MDXRemote {...post.source} components={Blog.X} />
+							<MDXRemote {...post.source} components={mdxComponents} />
 						</article>
 					</div>
 				</div>

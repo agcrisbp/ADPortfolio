@@ -5,6 +5,7 @@ import { Animate, List } from '~/components';
 import { ListActionType } from '~/types';
 import GenericMeta from "../components/GenericMeta";
 import type { GetStaticProps } from 'next';
+import seo from '~/data/seo.json';
 
 import type { ListAction, Project } from '~/types';
 
@@ -29,8 +30,8 @@ export default function ProjectsPage({ stringifiedProjects }: ProjectProps): Rea
 	return (
 		<Layout.Default>
 		  <GenericMeta
-				title="Projects"
-				description="Description."
+				title={seo.project.title}
+				description={seo.project.description}
 			/>
 			<div className="my-24 mx-2 sm:mx-6 lg:mb-28 lg:mx-8">
 				<div className="relative max-w-xl mx-auto">

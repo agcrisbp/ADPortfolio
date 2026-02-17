@@ -1,0 +1,39 @@
+{
+  "ogImage": "/banner.png",
+  
+  "about": {
+    "name": "CharFolio",
+    "description": "A short introduction about yourself.",
+    "birthday": "1995-02-17"
+  },
+  
+  "social": [
+    {
+      "name": "GitHub",
+      "icon": "ri:github-fill",
+      "url": "https://github.com/charisprod"
+    }
+  ],
+  
+  "blog": {
+    "title": "Blog & Writings",
+    "description": "Thoughts, notes, and experiences I have shared. This is where I write about things I learn, build, and explore."
+  },
+  
+  "project": {
+    "title": "Projects & Creations",
+    "description": "A collection of projects I have worked on, including experiments, tools, and things I built to solve problems or learn something new.",
+    "github": "charisprod",
+    "topic": "projects"
+  },
+  
+  "timeline": {
+    "title": "Interactive Life Timeline & Career Journey",
+    "description": "Explore my life journey and career milestones, from childhood to the present. Discover the moments, achievements, and experiences that shaped who I am today."
+  },
+  
+  "status": {
+    "title": "Live Discord Status & Activity",
+    "description": "See my current Discord status and activity in real time. Find out what I am playing, listening to, or whether I am online and available to chat."
+  }
+}

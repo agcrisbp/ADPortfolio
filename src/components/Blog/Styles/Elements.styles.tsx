@@ -55,8 +55,20 @@ export function ElementsStyles(): React.JSX.Element {
 				}
 
 				figcaption {
-					@apply text-gray-200 dark:text-gray-400 text-center;
+					@apply text-gray-500 dark:text-blue-400 text-center text-sm italic;
 				}
+				
+				.prose figure {
+					@apply my-2;
+				}
+
+				.prose figure img {
+					@apply m-0;
+				}
+        
+        .prose a figure {
+            @apply cursor-pointer;
+        }
 
 				hr {
 					@apply my-4 dark:border-gray-600;
@@ -75,12 +87,31 @@ export function ElementsStyles(): React.JSX.Element {
 					@apply bg-gray-200 dark:bg-gray-800 m-0 dark:text-white border-2 border-gray-100 dark:border-gray-500 rounded-lg rounded-t-none;
 				}
 
-				th {
-					@apply dark:text-white;
+				.prose table {
+					@apply w-full border-collapse border-2 border-gray-300 dark:border-gray-700 overflow-hidden rounded-xl;
+					display: table;
 				}
 
-				td {
-					@apply dark:text-gray-400;
+				.prose thead {
+					@apply bg-gray-100 dark:bg-gray-800/80 border-b-2 border-gray-300 dark:border-gray-700;
+				}
+
+				.prose th {
+					@apply border border-gray-300 dark:border-gray-700 text-left font-bold text-gray-900 dark:text-white uppercase tracking-wider text-sm;
+					@apply px-4 py-2 !important;
+				}
+
+				.prose td {
+					@apply border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300;
+					@apply px-4 py-2 !important;
+				}
+
+				.prose tbody tr:nth-child(even) {
+					@apply bg-gray-50 dark:bg-gray-800/30;
+				}
+
+				.prose tbody tr:hover {
+					@apply bg-gray-100 dark:bg-gray-700/50 transition-colors;
 				}
 
 				ol li::before {

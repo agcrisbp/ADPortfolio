@@ -1,5 +1,6 @@
 import emojiRegex from 'emoji-regex';
 import { log } from 'next-axiom';
+import seo from '~/data/seo.json';
 
 import type { GitHubRepos, Project, ProjectPost } from '~/types';
 
@@ -13,7 +14,7 @@ import type { GitHubRepos, Project, ProjectPost } from '~/types';
  * @TODO Switch to v3 API using GraphQL to save over-fetching
  */
 export async function fetchProjects(): Promise<Array<Project> | null> {
-	const response = await fetch('https://api.github.com/users/agcrisbp/repos', {
+	const response = await fetch(`https://api.github.com/users/${seo.project.github}/repos`, {
 		headers: {
 			...(process.env.GITHUB_PAT && {
 				authorization: `token ${process.env.GITHUB_PAT}`,
@@ -36,12 +37,12 @@ export async function fetchProjects(): Promise<Array<Project> | null> {
 
 	const json = (await response.json()) as GitHubRepos;
 
-	const { default: rawProjectPosts } = await import('~/data/projects.json');
+	const { default: rawProjectPosts } = await import('~/data/projects');
 	const projectPosts = rawProjectPosts as Array<ProjectPost>;
 
 	const projects: Array<Project> = json
 		.map((repo) => {
-			if (!repo.topics.includes('projects')) return null;
+			if (!repo.topics.includes(seo.project.topic)) return null;
 
 			if (repo.archived) return null;
 

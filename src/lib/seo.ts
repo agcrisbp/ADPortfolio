@@ -1,10 +1,11 @@
 import { useRouter } from 'next/router';
+import seo from '~/data/seo.json';
 
 export function useSeoProps(props: any = {}): any {
 	const router = useRouter();
 
-	const title = 'Your name.';
-	const description = "About you.";
+	const title = seo.about.name;
+	const description = seo.about.description;
 
 	return {
 		title,
@@ -13,12 +14,12 @@ export function useSeoProps(props: any = {}): any {
 		openGraph: {
 			title,
 			description,
-			site_name: 'Your Site',
+			site_name: seo.about.name,
 			url: `/${router.asPath}`,
 			type: 'website',
 			images: [
 				{
-					url: '/banner.png',
+					url: seo.ogImage,
 					alt: description,
 					width: 1280,
 					height: 720,

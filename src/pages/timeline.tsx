@@ -7,6 +7,7 @@ import { Button, Pill } from '~/components';
 import { Layout } from '~/layouts';
 import type { GetStaticProps } from 'next';
 import type { Timeline, TimelineEvent } from '~/types';
+import seo from '~/data/seo.json';
 
 interface TimelineProps {
 	timeline?: Timeline;
@@ -35,8 +36,8 @@ export default function TimelinePage({ timeline: rawTimeline }: TimelineProps): 
 	return (
 		<Layout.Default>
 		  <GenericMeta
-				title="Timeline"
-				description="Description."
+				title={seo.timeline.title}
+				description={seo.timeline.description}
 			/>
 			<div className="flex flex-grow min-h-screen pt-16 pb-12">
 				<div className="flex-grow flex flex-col justify-center max-w-sm sm:max-w-2xl w-full mx-auto px-0 sm:px-16">

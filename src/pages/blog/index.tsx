@@ -4,6 +4,7 @@ import { getAllPostsFrontMatter } from '~/lib/post';
 import { Layout } from '~/layouts';
 import GenericMeta from "../../components/GenericMeta";
 import type { GetStaticProps } from 'next';
+import seo from '~/data/seo.json';
 
 import type { FrontMatter } from '~/types';
 
@@ -31,8 +32,8 @@ export default function BlogPage({ serialisedFrontmatters }: BlogProps): React.J
 	return (
 		<Layout.Default>
 		  <GenericMeta
-				title="Blog"
-				description="Description."
+				title={seo.blog.title}
+				description={seo.blog.description}
 			/>
 			<div className="mt-8 sm:mt-16 mb-20 mx-0 sm:mx-6 lg:mb-28 lg:mx-8">
 				<div className="relative max-w-6xl mx-auto">

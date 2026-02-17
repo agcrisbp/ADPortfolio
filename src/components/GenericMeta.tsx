@@ -15,7 +15,7 @@ export default function GenericMeta({ title, description }: GenericMetaProps) {
 			<meta property="og:url" content="/" />
 			<meta property="og:image" content="/banner.png" />
 			<meta name="twitter:card" content="summary" />
-      <meta name="twitter:site" content="aghea.site" />
+      <meta name="twitter:site" content="charfolio-xi.vercel.app" />
       <meta name="twitter:creator" content="@agcrisbp" />
       <meta name="google-adsense-account" content="ca-pub-5238358527901368" />
 		</Head>

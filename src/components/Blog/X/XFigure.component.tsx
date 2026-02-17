@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 
 interface XFigureProps {
 	alt?: string;
@@ -8,17 +7,22 @@ interface XFigureProps {
 }
 
 export function XFigure({ alt, caption, src }: XFigureProps): React.JSX.Element {
+	const label = alt || caption;
+	
 	return (
 		<figure>
-			<Image
-				alt={alt ?? caption}
-				className="rounded-3xl object-cover select-none hover:shadow-xl"
-				draggable={false}
-				layout="responsive"
+			<img
+				alt={label ?? ''}
 				src={src}
-				fill
+				className="w-full h-auto"
+				draggable={false}
+				loading="lazy"
 			/>
-			<figcaption>{alt ?? caption}</figcaption>
+			{label && (
+				<figcaption className="text-center text-sm text-gray-500 dark:text-gray-400 italic">
+					{label}
+				</figcaption>
+			)}
 		</figure>
 	);
 }
