@@ -7,27 +7,27 @@ import { Button, Pill } from '~/components';
 import { Layout } from '~/layouts';
 import type { GetStaticProps } from 'next';
 import type { Timeline, TimelineEvent } from '~/types';
-import seo from '~/data/seo.json';
+import { data } from '~/data';
 
 interface TimelineProps {
 	timeline?: Timeline;
 }
 
 export const getStaticProps: GetStaticProps<TimelineProps> = async () => {
-	const { default: rawTimeline } = await import('~/data/timeline.json');
-	const timeline = (rawTimeline as Array<TimelineEvent>).sort(
+	const { timeline } = await import('~/data');
+	const sortedTimeline = (timeline as Array<TimelineEvent>).sort(
 		(a, b) => +new Date(b.date) - +new Date(a.date),
 	);
 
 	return {
 		props: {
-			timeline,
+			timeline: sortedTimeline,
 		},
 	};
 };
 
-export default function TimelinePage({ timeline: rawTimeline }: TimelineProps): React.JSX.Element {
-	const timeline = rawTimeline.map((event) => ({
+export default function TimelinePage({ timeline: sortedTimeline }: TimelineProps): React.JSX.Element {
+	const timeline = sortedTimeline.map((event) => ({
 		...event,
 		// Note: Custom parser needed as Safari on iOS doesn't like the standard `new Date()` parsing
 		date: parse(event.date.toString(), 'dd-MM-yyyy', new Date()),
@@ -36,8 +36,8 @@ export default function TimelinePage({ timeline: rawTimeline }: TimelineProps): 
 	return (
 		<Layout.Default>
 		  <GenericMeta
-				title={seo.timeline.title}
-				description={seo.timeline.description}
+				title={data.timeline.title}
+				description={data.timeline.description}
 			/>
 			<div className="flex flex-grow min-h-screen pt-16 pb-12">
 				<div className="flex-grow flex flex-col justify-center max-w-sm sm:max-w-2xl w-full mx-auto px-0 sm:px-16">

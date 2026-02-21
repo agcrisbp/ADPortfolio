@@ -7,7 +7,7 @@ import { NavigationItemType, Theme } from '~/types';
 
 import type { NavigationItem, NavigationItems } from '~/types';
 
-import seo from '~/data/seo.json';
+import { data } from '~/data';
 
 const staticMenuItems: Array<Array<NavigationItem>> = [
 	[
@@ -36,7 +36,7 @@ const staticMenuItems: Array<Array<NavigationItem>> = [
 			href: '/timeline',
 		},
 	],
-	seo.social.map((social) => ({
+	data.social.map((social) => ({
 		type: NavigationItemType.LINK,
 		icon: social.icon,
 		text: social.name,
@@ -63,7 +63,7 @@ export function useNavigation(): {
 							type: NavigationItemType.LINK,
 							icon: <Status.Indicator color={color} pulse />,
 							text: 'Status',
-							href: '/status',
+							href: '',
 						} as NavigationItem,
 					],
 			  ]

@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { MDXRemote } from 'next-mdx-remote';
-import { Icon } from '@iconify/react';
 import { Blog, Pill } from '~/components';
 import { getPost, getAllPostSlugs } from '~/lib/post';
 import { Layout } from '~/layouts';
@@ -44,78 +44,67 @@ export const getStaticProps: GetStaticProps<BlogPostProps, PathProps> = async ({
 	};
 };
 
-const Pre = ({ children, ...props }: any) => {
-	const preRef = useRef<HTMLPreElement>(null);
-	const [copied, setCopied] = useState(false);
+const CustomLink = (props: any) => {
+	const href = props.href;
+	const isInternalLink = href && (href.startsWith('/') || href.startsWith('#'));
 
-	const onCopy = () => {
-		if (copied) return;
-		
-		setCopied(true);
-		if (preRef.current) {
-			navigator.clipboard.writeText(preRef.current.innerText);
-		}
-		setTimeout(() => setCopied(false), 2000);
-	};
+	if (isInternalLink) {
+		return (
+			<Link href={href} {...props}>
+				{props.children}
+			</Link>
+		);
+	}
 
 	return (
-		<div className="code-block-wrapper">
-			<button
-				onClick={onCopy}
-				className="copy-button"
-				title={copied ? 'Copied!' : 'Copy to clipboard'}
-			>
-				<Icon
-					icon={copied ? 'mdi:check' : 'mdi:content-copy'}
-					width={16}
-					height={16}
-					className={copied ? 'text-green-500' : ''}
-				/>
-			</button>
-			<pre ref={preRef} {...props}>
-				{children}
-			</pre>
-		</div>
+		<a target="_blank" rel="noopener noreferrer" {...props}>
+			{props.children}
+		</a>
 	);
 };
 
-const mdxComponents = {
+export const mdxComponents = {
 	...Blog.X,
-	pre: Pre,
+	a: CustomLink,
 	img: (props: any) => <Blog.X.XFigure {...props} />,
+	pre: (props: any) => <Blog.X.XCode {...props} />,
+	Accordion: Blog.X.XAccordion,
+	AccordionGroup: Blog.X.XAccordionGroup,
 };
 
 export default function BlogPost({ post }: BlogPostProps): React.JSX.Element {
-	return (
-		<>
-			<Layout.Blog
-				seo={{
-					title: `${post.frontmatter.title}`,
-					description: post.frontmatter.description ?? undefined,
-					openGraph: {
-						title: post.frontmatter.title,
-						images: [
-							{
-								url: post.frontmatter.banner,
-								alt: post.frontmatter.description
-							},
-						],
-					},
-				}}>
-				<div className="relative px-4 py-16 overflow-hidden">
-					<div className="relative px-4 sm:px-6 lg:px-8">
-						{post.frontmatter.banner && (post.frontmatter.banner_show ?? true) && (
-							<div className="relative sm:max-w-2xl lg:sm:max-w-6xl mx-auto my-2 sm:my-4">
-								<div className="w-full h-full h-64 lg:h-96 mb-8 bg-gray-200 dark:bg-gray-600 rounded-3xl motion-safe:animate-pulse" />
-								<Image
-									alt={post.frontmatter.banner_alt ?? post.frontmatter.title}
-									className="absolute top-0 left-0 w-full h-auto max-h-64 lg:max-h-96 mb-8 rounded-3xl object-cover select-none shadow-xl default-transition"
-									draggable={false}
-									layout="fill"
-									src={post.frontmatter.banner}
-								/>
-							</div>
-						)}
+  const banner = post.frontmatter.banner || `/api/og?title=${encodeURIComponent(post.frontmatter.title)}&description=${encodeURIComponent(post.frontmatter.description)}`;
+
+  return (
+    <>
+      <Layout.Blog
+        seo={{
+          title: post.frontmatter.title,
+          description: post.frontmatter.description ?? undefined,
+          openGraph: {
+            title: post.frontmatter.title,
+            images: [
+              {
+                url: banner,
+                alt: post.frontmatter.description,
+              },
+            ],
+          },
+        }}>
+        <div className="relative px-4 py-16 overflow-hidden">
+          <div className="relative px-4 sm:px-6 lg:px-8">
+            {banner && (
+              <div className="relative sm:max-w-2xl lg:sm:max-w-6xl mx-auto my-2 sm:my-4">
+                <div className="w-full h-64 lg:h-96 mb-8 bg-gray-200 dark:bg-gray-600 rounded-3xl motion-safe:animate-pulse" />
+                <Image
+                  alt={post.frontmatter.banner_alt ?? post.frontmatter.title}
+                  className="absolute top-0 left-0 w-full h-auto max-h-64 lg:max-h-96 mb-8 rounded-3xl object-cover select-none shadow-xl default-transition"
+                  draggable={false}
+                  layout="fill"
+                  src={banner}
+                />
+              </div>
+            )}
 
 						<div className="flex flex-col space-y-4 max-w-prose mx-auto my-4 text-lg text-center">
 							<div>
@@ -142,6 +131,10 @@ export default function BlogPost({ post }: BlogPostProps): React.JSX.Element {
 
 						<article className="max-w-prose prose prose-primary prose-lg text-gray-500 mx-auto">
 							<MDXRemote {...post.source} components={mdxComponents} />
+							<Blog.X.XShare
+							  title={post.frontmatter.title}
+							  description={post.frontmatter.description}
+							 />
 						</article>
 					</div>
 				</div>

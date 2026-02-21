@@ -55,25 +55,46 @@ date: '2023-07-01'
 
 ## Code Blocks
 
-```javascript
-const isProduction = process.env.NODE_ENV === 'production';
-const domain = isProduction ? 'YourDomainWithoutHTTPS' : 'localhost:3000';
-const protocol = isProduction ? 'https' : 'http';
+```js[class="line-numbers"]{2,4,9-11}:components/XCode.js
+function initializeApp() {
+  console.log('Line 2: CharFolio starting...'); // Highlighted
+  const config = {
+    version: '3.0.1', // Highlighted
+    env: 'production'
+  };
 
-/**
- * @type {import('next-sitemap').IConfig}
- */
-module.exports = {
-	exclude: ['/server-sitemap.xml'],
-	generateRobotsTxt: true,
-	robotsTxtOptions: {
-		additionalSitemaps: [
-			`${protocol}://${domain}/sitemap.xml`,
-			`${protocol}://${domain}/server-sitemap.xml`,
-		],
-	},
-	siteUrl: `${protocol}://${domain}`,
-};
+  if (config.version) {
+    console.log('Line 9: Config version detected'); // Highlighted
+    console.log('Line 10: Preparing modules...'); // Highlighted
+    console.log('Line 11: Modules ready'); // Highlighted
+  }
+
+  const port = 3000;
+  console.log(`Server running on port ${port}`);
+}
+
+```
+
+```js{2,6-8,12}
+function handleProcessRequest(request) {
+  console.log('Line 2: Request received');
+  const { id, type, payload } = request;
+
+  if (type === 'SYNC') {
+    console.log('Line 6: Starting sync process'); // Highlighted 6-8
+    validatePayload(payload);
+    saveToDatabase(id, payload);
+  }
+
+  const status = 'COMPLETED';
+  console.log('Line 12: Process ' + status); // Highlighted
+  return { success: true, status };
+}
+
+function validatePayload(data) {
+  return data !== null;
+}
+
 ```
 
 ---
@@ -83,19 +104,39 @@ This is `Escaping Backticks`.
 
 ---
 
+## Accordion
+
+<Accordion title="Lorem ipsum AAA" open>
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+</Accordion>
+
+<AccordionGroup>
+  <Accordion title="Lorem ipsum BBB">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  </Accordion>
+  <Accordion title="Lorem ipsum CCC" open>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+
 ## Image
 ![Banner](/banner.png)
 
 ### Linking Image
-[![Banner](/banner.png)](https://github.com/agcrisbp/ADPortfolio/blob/main/public/banner.png?raw=true)
+[![Banner](/banner.png)](https://github.com/charisprod/charfolio/blob/main/public/banner.png?raw=true)
 
 ---
 
 ## Link
-- [Website](https://aghea.site)
+- [Website](https://aghea.vercel.app)
+- [Blog](/blog)
+- [HEADING 1](#heading-1)
 
 ### Auto Link & Email Addresses
-- https://aghea.site
+- https://aghea.vercel.app
 - agcrisbp@proton.me
 
 ---

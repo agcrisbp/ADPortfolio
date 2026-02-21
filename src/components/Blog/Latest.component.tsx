@@ -13,6 +13,8 @@ interface LatestProps {
 export function Latest({ frontmatter }: LatestProps): React.JSX.Element {
   const ariaLabel = `Read: ${frontmatter.title}`;
   const href = `/blog/${frontmatter.slug}`;
+  
+  const banner = frontmatter.banner || `/api/og?title=${encodeURIComponent(frontmatter.title)}&description=${encodeURIComponent(frontmatter.description)}`;
 
   return (
     <Link
@@ -20,7 +22,7 @@ export function Latest({ frontmatter }: LatestProps): React.JSX.Element {
       href={href}
       className="flex flex-col lg:flex-row mt-12 bg-white/75 dark:bg-gray-900/75 dark:border-gray-500 backdrop-filter backdrop-blur-sm rounded-2xl hover:shadow-xl cursor-pointer border-2 border-gray-100 transform motion-safe:hover:-translate-y-1 default-transition default-focus"
     >
-      {(frontmatter.banner_show ?? true) && (
+      {banner && (
         <div className="relative flex justify-center my-auto w-full xl:w-2/4 h-64 border-b-2 sm:h-72 sm:border-0 sm:border-r-2 border-gray-100 dark:border-gray-500 overflow-hidden rounded-2xl rounded-b-none lg:max-w-xl lg:h-96 lg:rounded-l-2xl lg:rounded-r-none default-transition">
           <div className="w-full h-full mb-8 bg-gray-200 dark:bg-gray-600 rounded-lg rounded-l-none lg:(rounded-l-lg rounded-r-none motion-safe:animate-pulse)" />
           <Image
@@ -28,7 +30,7 @@ export function Latest({ frontmatter }: LatestProps): React.JSX.Element {
             className="absolute top-0 left-0 w-full h-full rounded-lg rounded-b-none lg:(rounded-l-lg rounded-r-none) object-cover select-none"
             draggable={false}
             layout="fill"
-            src={frontmatter.banner}
+            src={banner}
           />
         </div>
       )}

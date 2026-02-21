@@ -10,7 +10,7 @@ import { Status } from '~/components';
 import Spotify from '~/components/Spotify';
 import type { EventProps } from '~/components/Event.component';
 import type { NavigationItem } from '~/types';
-import seo from '~/data/seo.json';
+import { data } from '~/data';
 
 const Event = dynamic<EventProps>(
 	() => import('~/components/Event.component').then(({ Event }) => Event),
@@ -24,20 +24,20 @@ const ACTIONS: Array<NavigationItem> = [
 		type: NavigationItemType.LINK,
 		href: '/blog',
 		icon: <Icon className="mr-3" icon="feather:edit-3" />,
-		text: seo.blog.title,
+		text: data.blog.title,
 	},
 	{
 		type: NavigationItemType.LINK,
 		href: '/projects',
 		icon: <Icon className="mr-3" icon="feather:copy" />,
-		text: seo.project.title,
+		text: data.project.title,
 		external: true,
 	},
 ];
 
 export default function HomePage(): React.JSX.Element {
 	const today = new Date();
-	const birthday = new Date(seo.about.birthday);
+	const birthday = new Date(data.about.birthday);
 	const age = differenceInYears(today, birthday);
 	const isBirthday = isSameDay(today, birthday) && isSameMonth(today, birthday);
 
@@ -45,8 +45,8 @@ export default function HomePage(): React.JSX.Element {
 	return (
 		<Layout.Default>
 		<GenericMeta
-				title={seo.about.name}
-				description={seo.about.description}
+				title={data.about.name}
+				description={data.about.description}
 			/>
 			{isBirthday && <Event event={EventType.BIRTHDAY} />}
 			<div className="min-h-screen flex items-center justify-center py-12">
@@ -58,7 +58,7 @@ export default function HomePage(): React.JSX.Element {
 							scale: [0.75, 1],
 						}}
 						className="text-gray-500 dark:text-white text-5xl sm:text-6xl md:text-6xl lg:text-8xl tracking-tight font-extrabold">
-						{seo.about.name}
+						{data.about.name}
 					</Animate>
 
 					<Animate
@@ -71,7 +71,7 @@ export default function HomePage(): React.JSX.Element {
 						transition={{
 							delay: 0.5,
 						}}>
-						<span className="opacity-50 dark:text-white text-black">{seo.about.description}</span>
+						<span className="opacity-50 dark:text-white text-black">{data.about.description}</span>
 					</Animate>
 
 					<div className="flex flex-col sm:flex-row items-center justify-center sm:space-x-4 space-y-4 sm:space-y-0 w-full mt-8 sm:mt-4">

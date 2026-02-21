@@ -1,5 +1,8 @@
 import type { ProjectPost } from '~/types/projects';
-const projects: ProjectPost[] = [];
+const projects: ProjectPost[] = [
+  {
+    post: "updating-data",
+    repository: "charisprod/charfolio"
+  }
+];
 export default projects;
-
-// NOTE: This file should not be edited.

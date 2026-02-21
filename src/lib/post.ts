@@ -9,6 +9,7 @@ import RehypeAutolinkHeadings from 'rehype-autolink-headings';
 import RemarkCodeTitles from 'remark-code-titles';
 import RemarkEmoji from 'remark-emoji';
 import RemarkPrism from 'remark-prism';
+import rehypeRaw from 'rehype-raw';
 import RemarkGfm from 'remark-gfm';
 import RehypeSlug from 'rehype-slug';
 
@@ -62,13 +63,27 @@ export async function getPost(slug: string): Promise<Post> {
 		mdxOptions: {
 			rehypePlugins: [
 				RehypeSlug, 
+				[rehypeRaw, { passThrough: ['mdxJsxFlowElement'] }],
 				[RehypeAutolinkHeadings, {}]
 			],
 			remarkPlugins: [
 				RemarkGfm,
 				RemarkCodeTitles, 
 				RemarkEmoji, 
-				RemarkPrism
+				[RemarkPrism, {
+				    showSpotlight: true,
+				    plugins: [
+              'autolinker',
+              'command-line',
+              'data-uri-highlight',
+              'diff-highlight',
+              'inline-color',
+              'keep-markup',
+              'line-numbers',
+              'treeview',
+            ],
+				  }
+				]
 			],
 		},
 		scope: data,

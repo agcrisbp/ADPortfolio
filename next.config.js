@@ -24,6 +24,15 @@ const nextConfig = {
         hostname: "**",
       },
     ],
+    localPatterns: [
+      {
+        pathname: '/**',
+      },
+      {
+        pathname: '/api/og',
+        search: '?url=*',
+      },
+    ],
   },
   
   turbopack: {},
@@ -48,6 +57,7 @@ const nextConfig = {
       test: /\.(glsl|vs|fs|frag|vert)$/,
       use: ['ts-shader-loader'],
     });
+
     return config;
   },
 };

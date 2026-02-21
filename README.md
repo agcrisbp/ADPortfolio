@@ -42,7 +42,7 @@ npx create-next-app@latest charfolio --example https://github.com/charisprod/cha
 npm run dev
 ```
 
-> Edit [seo.json](src/data/seo.json) & deploy.
+> Edit [data.ts](src/data/data.ts) & deploy.
 
 ---
 

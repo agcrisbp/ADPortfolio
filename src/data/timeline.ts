@@ -1,0 +1,32 @@
+const timeline = [
+  {
+    date: "22-10-2022",
+    title: "Work",
+    description: "Lorem ipsum.",
+    icon: "feather:briefcase",
+    link: {
+      text: "Visit",
+      url: "https://example.com/"
+    }
+  },
+  {
+    date: "03-01-2015",
+    title: "Graduated",
+    description: "Lorem ipsum.",
+    icon: "feather:award"
+  },
+  {
+    date: "03-01-2015",
+    title: "Start University",
+    description: "Lorem ipsum.",
+    icon: "feather:book"
+  },
+  {
+    date: "03-01-2015",
+    title: "Birthday",
+    description: "Lorem ipsum.",
+    icon: "feather:gift"
+  }
+];
+
+export default timeline;
