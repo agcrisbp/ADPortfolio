@@ -129,10 +129,16 @@ export function CodeStyles(): React.JSX.Element {
 				.token.operator, .token.entity, .token.url { @apply text-cyan-600 dark:text-cyan-300; }
 				.token.attr-name { @apply text-yellow-600 dark:text-yellow-200; }
 
-				pre[class*='language-'] {
-					@apply m-0 p-5 overflow-auto custom-scrollbar bg-white dark:bg-[#0d1117];
-				}
-
+        pre[class*='language-'] {
+          @apply m-0 p-5 overflow-auto custom-scrollbar bg-white dark:bg-[#0d1117];
+          display: block; 
+        }
+        
+        code[class*='language-'] {
+          display: block;
+          min-width: fit-content; 
+        }
+        
 				.custom-scrollbar::-webkit-scrollbar {
 					width: 10px;
 					height: 10px;
@@ -142,8 +148,13 @@ export function CodeStyles(): React.JSX.Element {
 				}
 
 				.remark-highlight-code-line {
-					@apply bg-blue-500/10 border-l-[3px] border-blue-500 -ml-5 pl-4 block w-[calc(100%+1.25rem)];
-				}
+          @apply bg-blue-500/10 border-l-[3px] border-blue-500;
+          display: block;
+          min-width: 100%;
+          margin-left: -1.25rem;
+          padding-left: 1rem;
+          padding-right: 1.25rem;
+        }
 			`}
 		</style>
 	);
