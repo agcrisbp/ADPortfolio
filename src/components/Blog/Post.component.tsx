@@ -25,13 +25,14 @@ export function _Post({ index, frontmatter }: PostProps): React.JSX.Element {
       className="flex flex-col bg-white bg-opacity-75 dark:bg-gray-900 dark:bg-opacity-75 backdrop-filter backdrop-blur-sm border-2 border-gray-100 dark:border-gray-500 rounded-2xl overflow-hidden hover:shadow-xl cursor-pointer transform motion-safe:hover:-translate-y-1 default-transition default-focus"
     >
       {index <= 2 && (
-        <div className="relative flex justify-center w-full max-w-xl my-auto rounded-t-lg overflow-hidden">
-          <div className="w-full h-full lg:h-48 bg-gray-200 dark:bg-gray-600 motion-safe:animate-pulse" />
+        <div className="relative w-full max-w-xl rounded-t-lg overflow-hidden pt-[56.25%]">
+          <div className="absolute inset-0 bg-gray-200 dark:bg-gray-600 motion-safe:animate-pulse" />
           <Image
             alt={frontmatter.title}
-            className="absolute top-0 left-0 w-full h-48 object-cover select-none"
+            className="absolute top-0 left-0 w-full h-full rounded-lg rounded-b-none lg:(rounded-l-lg rounded-r-none) object-cover select-none"
             draggable={false}
-            layout="fill"
+            width={1920}
+            height={1080}
             loading="lazy"
             src={banner}
           />

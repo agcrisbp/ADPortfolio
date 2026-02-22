@@ -1,5 +1,6 @@
 import { ImageResponse } from 'next/og';
 import { NextRequest } from 'next/server';
+import { data } from '~/data';
 
 export const config = {
   runtime: 'edge',
@@ -38,7 +39,6 @@ export default async function handler(req: NextRequest) {
           }}
         >
           {/* --- BACKGROUND ACCENTS --- */}
-          {/* Subtle Radial Gradient */}
           <div style={{
             position: 'absolute',
             top: '50%',
@@ -50,7 +50,6 @@ export default async function handler(req: NextRequest) {
             display: 'flex',
           }} />
 
-          {/* Indigo Spotlight */}
           <div style={{
             position: 'absolute',
             top: -200,
@@ -73,16 +72,18 @@ export default async function handler(req: NextRequest) {
               borderRadius: '60px',
               padding: '80px',
               width: '100%',
-              maxWidth: '1600px',
+              maxWidth: '1720px',
               position: 'relative',
               boxShadow: '0 50px 100px rgba(0,0,0,0.5)',
+              overflow: 'visible',
             }}
           >
-            {/* Top Badge Overlay */}
+            {/* Badge Version */}
             <div style={{
               position: 'absolute',
-              top: -30,
+              top: 0,
               left: 80,
+              transform: 'translateY(-50%)',
               padding: '12px 24px',
               backgroundColor: '#4F46E5',
               borderRadius: '12px',
@@ -94,28 +95,41 @@ export default async function handler(req: NextRequest) {
             </div>
 
             {/* Content Section */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+            <div style={{ 
+              display: 'flex', 
+              flexDirection: 'column', 
+              gap: '32px',
+              width: '100%',
+              marginTop: '20px',
+            }}>
+              {/* TITLE */}
               <div style={{
                 display: 'flex',
-                fontSize: title.length > 20 ? '140px' : '170px',
+                flexWrap: 'wrap',
+                fontSize: title.length > 50 ? '80px' : title.length > 25 ? '110px' : '150px',
                 fontWeight: 800,
-                lineHeight: 1.2,
-                letterSpacing: '-0.07em',
-                background: 'linear-gradient(to bottom, #FFF 40%, #777 100%)',
+                lineHeight: 1.1,
+                letterSpacing: '-0.05em',
+                background: 'linear-gradient(to bottom, #FFF 40%, #888 100%)',
                 backgroundClip: 'text',
                 color: 'transparent',
+                width: '100%',
+                wordBreak: 'break-word',
               }}>
                 {title}
               </div>
 
+              {/* DESCRIPTION */}
               <div style={{
                 display: 'flex',
-                fontSize: '52px',
+                flexWrap: 'wrap',
+                fontSize: description.length > 150 ? '38px' : '48px',
                 fontWeight: 400,
-                color: '#888',
+                color: '#aaa',
                 lineHeight: 1.4,
-                maxWidth: '1100px',
+                maxWidth: '1400px',
                 letterSpacing: '-0.02em',
+                wordBreak: 'break-word',
               }}>
                 {description}
               </div>
@@ -124,29 +138,29 @@ export default async function handler(req: NextRequest) {
             {/* Footer Inside Card */}
             <div style={{
               display: 'flex',
-              marginTop: '100px',
+              marginTop: '80px',
               alignItems: 'center',
               justifyContent: 'space-between',
-              borderTop: '1px solid rgba(255,255,255,0.05)',
+              borderTop: '1px solid rgba(255,255,255,0.08)',
               paddingTop: '60px',
+              width: '100%',
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
-                <img src="https://www.charisprod.xyz/trademarks/charis.svg" width="64" height="64" />
-                <span style={{ fontSize: '32px', fontWeight: 800, color: '#FFF' }}>Charis Production</span>
+                <img src={"https://" + data.baseURL + data.about.avatar} width="64" height="64" />
+                <span style={{ fontSize: '32px', fontWeight: 800, color: '#FFF' }}>{data.about.name}</span>
               </div>
             </div>
           </div>
 
-          {/* Bottom Branding */}
           <div style={{
             position: 'absolute',
             bottom: 40,
             fontSize: '20px',
-            color: '#222',
+            color: '#333',
             fontWeight: 800,
             letterSpacing: '0.5em',
           }}>
-            charisprod.xyz
+            {data.baseURL}
           </div>
         </div>
       ),

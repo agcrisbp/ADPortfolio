@@ -20,19 +20,19 @@ const staticMenuItems: Array<Array<NavigationItem>> = [
 		{
 			type: NavigationItemType.LINK,
 			icon: 'feather:edit-3',
-			text: 'Blog',
+			text: data.blog.title,
 			href: '/blog',
 		},
 		{
 			type: NavigationItemType.LINK,
 			icon: 'feather:copy',
-			text: 'Projects',
+			text: data.project.title,
 			href: '/projects',
 		},
 		{
 			type: NavigationItemType.LINK,
 			icon: 'feather:clock',
-			text: 'Timeline',
+			text: data.timeline.title,
 			href: '/timeline',
 		},
 	],

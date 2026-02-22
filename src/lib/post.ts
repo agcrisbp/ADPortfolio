@@ -52,8 +52,6 @@ export async function getAllPostsFrontMatter(): Promise<Array<FrontMatter>> {
 
 /**
  * Get the frontmatter metadata & post MDX contents from file
- *
- * @param {string} slug - Slug / file name of the blog post to load data from
  */
 export async function getPost(slug: string): Promise<Post> {
 	const raw = readFileSync(join(BLOG_POSTS_DIR, `${slug}.md`)).toString();

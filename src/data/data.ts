@@ -1,8 +1,10 @@
 const data = {
   ogImage: "/banner.png",
+  baseURL: "charfolio-xi.vercel.app",
   
   about: {
     name: "CharFolio",
+    avatar: "/images/avatar.jpg",
     description: "A developer with an eye for detail and a passion for performance. CharFolio believes that great technology is both beautiful and functional. Currently creating immersive digital experiences.",
     birthday: "1945-08-17"
   },
@@ -33,7 +35,7 @@ const data = {
   },
   
   timeline: {
-    title: "Interactive Life Timeline & Career Journey",
+    title: "Timeline & Career Journey",
     description: "Explore my life journey and career milestones, from childhood to the present. Discover the moments, achievements, and experiences that shaped who I am today."
   },
 };

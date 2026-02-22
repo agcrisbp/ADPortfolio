@@ -5,3 +5,4 @@ export { XFigure } from './XFigure.component';
 export { XSandbox } from './XSandbox.component';
 export { XShare } from './XShare.component';
 export { XStreamable } from './XStreamable.component';
+export { XQuote } from './XQuote.component';

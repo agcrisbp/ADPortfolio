@@ -29,7 +29,8 @@ export function Latest({ frontmatter }: LatestProps): React.JSX.Element {
             alt={frontmatter.banner_alt ?? frontmatter.title}
             className="absolute top-0 left-0 w-full h-full rounded-lg rounded-b-none lg:(rounded-l-lg rounded-r-none) object-cover select-none"
             draggable={false}
-            layout="fill"
+            width={1920}
+            height={1080}
             src={banner}
           />
         </div>

@@ -4,22 +4,25 @@ import { data } from '~/data';
 export function useSeoProps(props: any = {}): any {
 	const router = useRouter();
 
-	const title = data.about.name;
-	const description = data.about.description;
+	const title = props.title || data.about.name;
+	const description = props.description || data.about.description;
+	const ogImage = data.ogImage 
+		? `https://${data.baseURL}${data.ogImage}`
+		: `https://${data.baseURL}/api/og?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}`;
 
 	return {
 		title,
 		description,
-		canonical: `/${router.asPath}`,
+		canonical: `https://${data.baseURL}${router.asPath === '/' ? '' : router.asPath}`,
 		openGraph: {
 			title,
 			description,
 			site_name: data.about.name,
-			url: `/${router.asPath}`,
+			url: `https://${data.baseURL}${router.asPath}`,
 			type: 'website',
 			images: [
 				{
-					url: data.ogImage,
+					url: ogImage,
 					alt: description,
 					width: 1280,
 					height: 720,
@@ -28,8 +31,8 @@ export function useSeoProps(props: any = {}): any {
 		},
 		twitter: {
 			cardType: 'summary_large_image',
-			handle: '@crisminolog',
-			site: '@crisminolog',
+			handle: '@charisprod',
+			site: '@charisprod',
 		},
 		...props,
 	};
