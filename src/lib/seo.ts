@@ -6,7 +6,7 @@ export function useSeoProps(props: any = {}): any {
 
 	const title = props.title || data.about.name;
 	const description = props.description || data.about.description;
-	const ogImage = data.ogImage 
+	const ogImage = data.ogImage && data.ogImage.length > 0
 		? `https://${data.baseURL}${data.ogImage}`
 		: `https://${data.baseURL}/api/og?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}`;
 

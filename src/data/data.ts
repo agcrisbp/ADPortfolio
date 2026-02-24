@@ -1,5 +1,5 @@
 const data = {
-  ogImage: "/banner.png",
+  ogImage: "/banner.png", // string or []
   baseURL: "charfolio-xi.vercel.app",
   
   about: {

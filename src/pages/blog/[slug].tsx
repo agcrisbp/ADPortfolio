@@ -25,7 +25,7 @@ export const getStaticPaths: GetStaticPaths<PathProps> = async () => {
 	return {
 		paths: posts.map((post) => ({
 			params: {
-				slug: post.replace(/\.md/, ''),
+				slug: post.replace(/\.mdx/, ''),
 			},
 		})),
 		fallback: false,
@@ -104,16 +104,22 @@ export default function BlogPost({ post, otherPosts }: BlogPostProps): React.JSX
 				<div className="relative px-4 py-16 overflow-hidden">
 					<div className="relative px-4 sm:px-6 lg:px-8">
 						{banner && (
-							<div className="relative sm:max-w-2xl lg:sm:max-w-6xl mx-auto my-2 sm:my-4">
-								<div className="w-full h-64 lg:h-96 mb-8 bg-gray-200 dark:bg-gray-600 rounded-3xl motion-safe:animate-pulse" />
-								<Image
-									alt={post.frontmatter.banner_alt ?? post.frontmatter.title}
-									className="absolute top-0 left-0 w-full h-auto max-h-64 lg:max-h-96 mb-8 object-cover select-none shadow-xl default-transition"
-									draggable={false}
-									width={1920}
-                  height={1080}
-									src={banner}
-								/>
+							<div className="relative w-full my-2 sm:my-4">
+								<div 
+									className="relative w-full overflow-hidden rounded-3xl shadow-xl mb-8 bg-gray-200 dark:bg-gray-600"
+									style={{ paddingBottom: '56.25%' }}
+								>
+									<div className="absolute inset-0 w-full h-full motion-safe:animate-pulse" />
+									<Image
+										alt={post.frontmatter.banner_alt ?? post.frontmatter.title}
+										className="absolute top-0 left-0 w-full h-full object-cover select-none default-transition"
+										draggable={false}
+										width={1920}
+										height={1080}
+										src={banner}
+										priority
+									/>
+								</div>
 							</div>
 						)}
 

@@ -117,10 +117,6 @@ export function ElementsStyles(): React.JSX.Element {
 				ol li::before {
 					@apply dark:text-gray-300;
 				}
-
-				.remark-code-title {
-					@apply light:bg-white px-4 py-2 text-gray-300 dark:text-white font-medium border-2 border-b-0 border-gray-100 dark:border-gray-500 rounded-lg rounded-b-none;
-				}
 			`}
 		</style>
 	);

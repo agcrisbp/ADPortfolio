@@ -17,7 +17,7 @@ export function CodeStyles(): React.JSX.Element {
 					/* Positioning */
 					position: relative !important;
 					z-index: 2 !important;
-					margin-bottom: -38px !important;
+					margin-bottom: -31px !important;
 					padding-top: 12px !important;
 					padding-left: 72px !important;
 					
