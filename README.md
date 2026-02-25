@@ -13,6 +13,11 @@
 
 ---
 
+### Add Your CharFolio To Showcase
+- [Showcase Submission](https://charisprod.xyz/submission).
+
+---
+
 # Support
 
 <a href="https://www.buymeacoffee.com/agcrisbp" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 32px !important;width: 114px !important;" ></a>
