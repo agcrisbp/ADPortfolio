@@ -4,7 +4,7 @@ export const READABLE_DISCORD_STATUS: {
   [S in DiscordStatus]: string;
 } = {
   ['dnd']: 'Do Not Disturb',
-  ['idle']: 'Away',
+  ['idle']: 'Idle',
   ['offline']: 'Offline',
   ['online']: 'Online',
 };

@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import { colors } from '~/lib';
 import type { WithClassName } from '~/types';
 import { READABLE_DISCORD_STATUS, type DiscordStatus } from '~/types/charis';
+import { useStatus } from '~/lib/charis';
 
 interface IndicatorProps extends WithClassName {
 	color?: string;
@@ -12,12 +13,14 @@ interface IndicatorProps extends WithClassName {
 
 export function Indicator({
 	className,
-	color = 'gray',
+	color: propColor = 'gray',
 	pulse = false,
-	status = 'offline',
+	status: propStatus = 'offline',
 }: IndicatorProps): React.JSX.Element {
 	const [tooltip, setTooltip] = useState(false);
 	const containerRef = useRef<HTMLDivElement>(null);
+	const { status: realtimeStatus } = useStatus();
+	const actualStatus = (realtimeStatus?.discord_status as DiscordStatus) || propStatus;
 
 	useEffect(() => {
 		function handleClickOutside(event: MouseEvent) {
@@ -47,12 +50,12 @@ export function Indicator({
 					{pulse && (
 						<span
 							className="absolute inline-flex w-full h-full opacity-75 rounded-full motion-safe:animate-ping"
-							style={{ backgroundColor: colors?.[color]?.['400'] }}
+							style={{ backgroundColor: colors?.[propColor]?.['400'] }}
 						/>
 					)}
 					<span
 						className="relative inline-flex w-3 h-3 rounded-full"
-						style={{ backgroundColor: colors?.[color]?.['500'] }}
+						style={{ backgroundColor: colors?.[propColor]?.['500'] }}
 					/>
 				</span>
 			</button>
@@ -62,7 +65,7 @@ export function Indicator({
 					className="absolute bottom-full flex flex-col items-center z-[9999]"
 				>
 					<div className="px-2 py-1 bg-black dark:bg-white text-gray-300 dark:text-black text-[10px] font-extrabold uppercase tracking-tight rounded shadow-2xl border border-gray-200 dark:border-white/10 whitespace-nowrap animate-in fade-in zoom-in-95 duration-100">
-						{READABLE_DISCORD_STATUS[status]}
+						{READABLE_DISCORD_STATUS[actualStatus]}
 					</div>
 					
 					<div 
